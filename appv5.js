@@ -1,9 +1,9 @@
 console.log("TICTACTOE");
 
 // customisable variables
-var boardLength = 5;
+var boardLength = 3;
 var blankToken = " ";
-var heroToken = "+";
+var heroToken = "X";
 var villainToken = "O";
 
 // initialise variables
@@ -160,7 +160,7 @@ var clearBoardArr = function(board){
 }
 
 var resetGameDisplay = function(){
-	heroWinCounterDiv.textContent = heroToken + " : " + 	heroWinCounter;
+	heroWinCounterDiv.textContent = heroToken + " : " +	heroWinCounter;
 	villainWinCounterDiv.textContent = villainToken + " : " + villainWinCounter;
 	displayPlayerTurnDiv.textContent = heroToken + " TURN";
 	displayWinnerDiv.textContent = "";

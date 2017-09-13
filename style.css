@@ -3,84 +3,113 @@
 }
 
 body{
+
+	/*background-image: url("https://i.pinimg.com/originals/9b/46/91/9b4691caed52c631bb27ca91cf9327ad.jpg");*/
+	/*background-image: url("https://i.pinimg.com/736x/a1/60/02/a16002fad10ba053050f05a24b3ec7a5.jpg"); */
+	/*background-image: url("https://i.pinimg.com/236x/a2/05/50/a205500c34ced3bb434f87222d4473fc--pineapple-wallpaper-tropical-pattern.jpg");*/
+	/*background-image: url("https://i.pinimg.com/236x/24/9c/41/249c41ca9b8d298f4d34feebcb2d8b7b.jpg");*/
+	/*background-image: url("https://i.pinimg.com/originals/e9/a4/3c/e9a43c8cf95ca2858580c790be584627.jpg");*/
+	
+	/*background-image: url("http://1.bp.blogspot.com/-l7ypa_KxQE4/VJnIsjUgd-I/AAAAAAAAEzQ/j-A7f3MPbqk/s1600/7.JPG");*/
+	/*background-image: url("https://i.pinimg.com/236x/ea/3e/4b/ea3e4beeec87f6027e29a4be43402a2b.jpg");*/
+
 	/*background-color: #6efa9b;*/
 	/*background-color: #03e1be;*/
+	
+	/*background-size: 50vh;*/
+
+	background-color: #e2fffa;
 	text-align: center;
-	font-size: 1.5em;
+	font-size: 4vh;
 }
 
 .hero-win-counter{
 	display: inline-block;
 	padding: 0.1em 1em;
 	border: 1px solid black;
-	border-radius: 28px;
-	margin: 0.5em;
-	background-color: black;
-	color: white;
+	border-radius: 3vh;
+	margin: 5vh 5vh 0 0;
+	background-color: #1d2937;
+	color: #f48eb5;
 }
 
 .villain-win-counter{
 	display: inline-block;
 	padding: 0.1em 1em;
 	border: 1px solid black;
-	border-radius: 28px;
-	margin: 0.5em;
-	background-color: black;
-	color: white;
+	border-radius: 3vh;
+	margin: 5vh 0 0 5vh;
+	background-color: #1d2937;
+	color:#faa878
 }
 
 .display-player-turn{
 	display: inline-block;
 	padding: 0.1em 1em;
-	/*border: 1px solid black;*/
-	/*border-radius: 28px;*/
-	margin: 0.5em;
+	border-radius: 3vh;
+	margin: 5vh 0 5vh 0;
+	background-color: #1d2937;
+	color: #fcd69a;
+
 }
 
 .game-board > * {
 	display: inline-block;
-	vertical-align: middle;
-/*	width: 33.3333%;
-	height: 33.3333%;*/
-/*	width: 25%;
-	height: 25%;*/
-	width: 20%;
-	height: 20%;
-	font-size: 2em;
+	vertical-align: top;
 	text-align: center;
-	border: 0.1px solid black;
-	margin: 0 auto;
+	width: 15vh;
+	height: 15vh;
+	font-size: 14.8vh;
+	border: 0.1vh solid black;
+	box-shadow: 0 0 3px 0.5px black;
 }
 
 .game-board{
 	margin: 0 auto;
-	width: 200px;
-	height: 200px;
+	width: 45vh;
+	height: 45vh;
+	box-shadow: 0 0 10px 0px black;
+	background-image: url("https://i.pinimg.com/originals/e9/a4/3c/e9a43c8cf95ca2858580c790be584627.jpg");
+	background-size: 50vh;
+	color: #e2fffb;
+
 }
 
-.game-board:hover{
-	transition: 0.5s;
+.game-board:hover {
+	transition: 0.3s;
 	cursor: pointer;
-	background-color: lightgrey;
+	background-image: url("https://i.pinimg.com/736x/a1/60/02/a16002fad10ba053050f05a24b3ec7a5.jpg"); 
+	background-size: 9vh;
+	color: #1e2a38;
+
 }
 
 .display-winner {
-	margin: 0.5em auto;
-	width: 200px;
-	height: 10px;
-	/*font-size: 2em;*/
+	display: inline-block;
+	margin: 1vh auto;
+	width: 30vh;
+	height: 10vh;
+	padding: 1em;
+	/*border: 1vh solid black;*/
+	color:#1d2937;
+	/*font-size: 6em;*/
 }
 
-.restart-game{
-	margin: 1em auto;
-	width: 200px;
+.restart-game {
+	margin: 1vh auto;
+	width: 30vh;
 	padding: 0.2em;
 	border: 1px solid black;
-	border-radius: 28px;
+	border-radius: 3vh;
+	background-color: #1d2937;
+	color:#eed4da;
 }
 
 .restart-game:hover{
 	transition: 0.5s;
 	cursor: pointer;
-	background-color: lightgrey;
+	background-image: url("https://i.pinimg.com/originals/e9/a4/3c/e9a43c8cf95ca2858580c790be584627.jpg");
+	background-size: 35vh;
+	color:#1d2937;
 }
+
