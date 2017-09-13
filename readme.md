@@ -1,15 +1,22 @@
 # Tropical-Tic-Tac-Toe
 
+## Objective
+* two player take turns to place token on a gameboard (size customisable)
+* first player to create a line of their tokens the length of the board wins
+
+## Technologies used
+* HTML, CSS, Javascript
+
 ## Pseudocode
-1. create a blank 3x3 gameboard of blank tokens -- each array must be Unique  
+1. create a blank 3x3 gameboard of blank tokens – each array must be Unique  
    1. create a winning board for hero with "O" token  
    2. create a winning board for villain "with X" token  
-2. check which player's turn it is
-3. event listener for when tile is clicked  
-   1. update content of tile to become current player's token  
-   2. update board  
-   3. check if game won by comparing current board with both winning boards  
-    * if true, won either by either horizontal, vertical, leading diagonal, skew diagonal
+2. check which player's turn it is  
+3. listen for tile clicks and modify the tile  
+   1. update content of the tile to become current player's token  
+   2. update DOM board  
+   3. check if game won by comparing current board against both winning boards  
+    * if true, i.e. won either by either horizontal, vertical, leading diagonal, skew diagonal
        * display winner (should be current player)   
        * winner's win-count++   
     * else,   
@@ -17,14 +24,14 @@
        * return to step 2
 
 ## Data-structure selection 
-Considerations 
-1) array of array (of objects) -- allows tracking of whether a tile has been picked using array object
-		e.g.		Board: [ [{}], [{}], [{}] ]
-										where the objects are {token: "playertoken", picked: "true/false"} 
-2) array of array (of strings) -- allows easy comparison of array contents
-		e.g. 		Board: [ [""], [""], [""] ]
+Considerations  
+1. array of array (of objects) -- allows tracking of whether a tile has been picked using array object
+* e.g.		Board: [ [{}], [{}], [{}] ]  
+* where the objects are {token: "playertoken", picked: "true/false"} 
+2. array of array (of strings) -- allows easy comparison of array contents
+* e.g. 		Board: [ [""], [""], [""] ]
 
-Chose option 2) as a simpler data structure makes it easier to compare game board against winnning boards
+Chose option 2. as a simpler data structure makes it easier to compare game board against winnning boards
 
 ## Things yet to do
 
