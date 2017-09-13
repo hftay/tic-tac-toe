@@ -2,8 +2,8 @@
 
 ## Pseudocode
 1. create a blank 3x3 gameboard of blank tokens -- each array must be Unique 
-		..1. create a winning board for hero with "O" token
-		..2. create a winning board for villain "with X" token
+		  1. create a winning board for hero with "O" token
+		  2. create a winning board for villain "with X" token
 2. check which player's turn it is
 3. event listener for when tile is clicked
 		..1. update content of tile to become current player's token
@@ -50,9 +50,9 @@ Practise toggle?
 - Use timers to display "waiting..." messages while users are waiting to be matched
 
 
-DONE - Keep track of multiple game rounds with a win counter
-DONE – Create "Restart Game"
-DONE – Incorporate logic for "Draw" situations
-DONE – Locked tiles that have already been clicked on!
++ DONE - Keep track of multiple game rounds with a win counter
++ DONE – Create "Restart Game"
++ DONE – Incorporate logic for "Draw" situations
++ DONE – Locked tiles that have already been clicked on!
 
 
