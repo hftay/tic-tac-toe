@@ -1,6 +1,6 @@
-# tic-tac-toe
+# tropical-tic-tac-toe
 
-#H1 Pseudocode
+# H1 Pseudocode
 1. create a blank 3x3 gameboard of blank tokens -- each array must be Unique 
 		..1. create a winning board for hero with "O" token
 		..2. create a winning board for villain "with X" token
@@ -16,7 +16,7 @@
 						..*. switch player turn
 						..*. return to step 2
 
-#H1 Data-structure selection 
+# H1 Data-structure selection 
 Considerations 
 1) array of array (of objects) -- allows tracking of whether a tile has been picked using array object
 		e.g.		Board: [ [{}], [{}], [{}] ]
@@ -26,7 +26,7 @@ Considerations
 
 Chose option 2) as a simpler data structure makes it easier to compare game board against winnning boards
 
-#H1 Things yet to do
+# H1 Things yet to do
 
 - fix functionality for increasing/decreasing boardsize?
 
