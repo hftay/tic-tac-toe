@@ -1,7 +1,7 @@
 console.log("TICTACTOE");
 
 // customisable variables
-var boardLength = 3;
+var boardLength = 5;
 var blankToken = " ";
 var heroToken = "X";
 var villainToken = "O";
@@ -133,7 +133,17 @@ var heroWinCounterDiv = document.querySelector(".hero-win-counter");
 var villainWinCounterDiv = document.querySelector(".villain-win-counter");
 var restartGameDiv = document.querySelector(".restart-game");
 
+var increaseBoardSize = document.querySelector(".increase-board-size");
+var decreaseBoardSize = document.querySelector(".decrease-board-size");
 
+
+
+var calculateTileSize = function(){
+	var numOfTilesPerRow = boardLength;
+	var widthOfBoard = gameBoardDiv.offsetWidth;
+	var widthOfEachTile = (widthOfBoard) / numOfTilesPerRow;
+	return widthOfEachTile;
+}
 
 var generateBlankBoard = function(){
 	gameBoardDiv.innerHTML=""; //clear board so it doesn't loop
@@ -142,9 +152,20 @@ var generateBlankBoard = function(){
 			var tile = document.createElement("div");
 			tile.dataset.row= i; 
 			tile.dataset.col= j; //creates a data attribute called col
+			tile.className = "tile";
 			gameBoardDiv.appendChild(tile);
 		}
 	}
+
+// To allow board to be custom sized without changing tile dimensions
+// must be AFTER generateBoard() is called
+	var gameBoardDivChildrenList = document.querySelectorAll(".tile");
+	var widthOfEachTile = calculateTileSize();
+	gameBoardDivChildrenList.forEach(function(value){
+		value.style.width = widthOfEachTile+"px";
+		value.style.height = widthOfEachTile+"px";
+		value.style.fontSize = widthOfEachTile+"px";
+	})
 }
 
 var updateBoard = function(board){
@@ -166,8 +187,8 @@ var resetGameDisplay = function(){
 	displayWinnerDiv.textContent = "";
 }
 
-var makeNewBoard = function(){
-	var displayTime = 1500 // in millisecs
+var makeNewBoard = function(pauseTime){
+	var displayTime = pauseTime // in millisecs
 	clearBoardArr(boardArr); // this step is requred, otherwise only the DOM game-board is updated
 	setTimeout(resetGameDisplay,displayTime); //
 	setTimeout(generateBlankBoard,displayTime);
@@ -182,9 +203,21 @@ var restartGame = function(){
 }
 
 // --------------- Event Listeners --------------- 
-
 generateBlankBoard();
 resetGameDisplay();
+
+// increaseBoardSize.addEventListener("click", function(){
+// 	clearBoardArr(boardArr);
+// 	boardLength++; // max 9x9
+// 	// makeNewBoard(0); // 1500ms
+// 	generateBlankBoard();
+// 	updateBoard(boardArr);
+
+// })
+
+// decreaseBoardSize.addEventListener("click", function(){
+// 	boardLength--; // min 2x2
+// })
 
 gameBoardDiv.addEventListener("click", function(event){
 
@@ -206,7 +239,8 @@ gameBoardDiv.addEventListener("click", function(event){
 				villainWinCounter++;
 				villainWinCounterDiv.textContent = villainToken + " : " + villainWinCounter;
 			}
-		makeNewBoard();
+		makeNewBoard(1500);
+
 		} 
 		// if game is not won, switch player
 		else {
@@ -224,7 +258,8 @@ gameBoardDiv.addEventListener("click", function(event){
 	if(numClicks===maxClicks){
 		displayPlayerTurnDiv.textContent = "GAME OVER";
 		displayWinnerDiv.textContent = "DRAW!";
-		makeNewBoard();
+		makeNewBoard(1500);
+
 	}
 
 });
@@ -232,3 +267,9 @@ gameBoardDiv.addEventListener("click", function(event){
 restartGameDiv.addEventListener("click",function(){
 	restartGame();
 })
+
+
+
+
+
+

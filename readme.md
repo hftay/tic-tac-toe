@@ -1,22 +1,22 @@
 # tic-tac-toe
 
-<!-- Pseudocode -->
+#H1 Pseudocode
 1. create a blank 3x3 gameboard of blank tokens -- each array must be Unique 
-		a) create a winning board for hero with "O" token
-		b) create a winning board for villain "with X" token
+		..1. create a winning board for hero with "O" token
+		..2. create a winning board for villain "with X" token
 2. check which player's turn it is
 3. event listener for when tile is clicked
-		a) update content of tile to become current player's token
-		b) update board 
-		c) check if game won by comparing current board with both winning boards
-				if true, won either by either horizontal, vertical, leading diagonal, skew diagonal
-						display winner (should be current player)
-						winner's win-count++
-				else,
-						switch player turn
-						return to step 2
+		..1. update content of tile to become current player's token
+		..2. update board 
+		..3. check if game won by comparing current board with both winning boards
+				..*. if true, won either by either horizontal, vertical, leading diagonal, skew diagonal
+						..*. display winner (should be current player)
+						..*. winner's win-count++
+				..*. else,
+						..*. switch player turn
+						..*. return to step 2
 
-<!-- Data-structure selection  -->
+#H1 Data-structure selection 
 Considerations 
 1) array of array (of objects) -- allows tracking of whether a tile has been picked using array object
 		e.g.		Board: [ [{}], [{}], [{}] ]
@@ -26,28 +26,28 @@ Considerations
 
 Chose option 2) as a simpler data structure makes it easier to compare game board against winnning boards
 
+#H1 Things yet to do
 
-<!-- DOM Manipulation -->
-Game Board ... 9 divs?
+- fix functionality for increasing/decreasing boardsize?
 
-<!-- Things yet to do -->
+- CSS; try using active, classList etc
 
-CSS two different colours for different token
+- CSS two different colours for different token
 
-Try new things for CSS; 
+- Research web audio API and add sound effects to your game
+
+- Readability
+
+- Try new things for CSS; 
 Practise toggle?
 
-Research web audio API and add sound effects to your game
+- A readme.md file with explanations of the technologies used, the approach taken, installation instructions, unsolved problems, etc.
 
-Readability
+- Allow game customizable options, time limits (TBA), board size (OK), game rounds, name & profiles etc
 
-A readme.md file with explanations of the technologies used, the approach taken, installation instructions, unsolved problems, etc.
+- Research LocalStorage or SessionStorage to persist data locally to allow games to continue after page refresh or loss of internet connectivity
 
-Allow game customizable options, time limits (TBA), board size (OK), game rounds, name & profiles etc
-
-Research LocalStorage or SessionStorage to persist data locally to allow games to continue after page refresh or loss of internet connectivity
-
-Use timers to display "waiting..." messages while users are waiting to be matched
+- Use timers to display "waiting..." messages while users are waiting to be matched
 
 
 DONE - Keep track of multiple game rounds with a win counter
