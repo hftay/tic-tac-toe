@@ -1,20 +1,20 @@
-# Tropical-tic-tac-toe
+# Tropical-Tic-Tac-Toe
 
 ## Pseudocode
 1. create a blank 3x3 gameboard of blank tokens -- each array must be Unique  
    1. create a winning board for hero with "O" token  
-   - create a winning board for villain "with X" token  
+   2. create a winning board for villain "with X" token  
 2. check which player's turn it is
 3. event listener for when tile is clicked  
-  1. update content of tile to become current player's token  
-  2. update board  
-  3. check if game won by comparing current board with both winning boards  
-    *if true, won either by either horizontal, vertical, leading diagonal, skew diagonal
-						..*. display winner (should be current player)
-						..*. winner's win-count++
-				..*. else,
-						..*. switch player turn
-						..*. return to step 2
+   1. update content of tile to become current player's token  
+   2. update board  
+   3. check if game won by comparing current board with both winning boards  
+    * if true, won either by either horizontal, vertical, leading diagonal, skew diagonal
+       * display winner (should be current player)   
+       * winner's win-count++   
+    * else,   
+       * switch player turn   
+       * return to step 2
 
 ## Data-structure selection 
 Considerations 
