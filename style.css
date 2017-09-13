@@ -1,0 +1,86 @@
+*{
+	box-sizing: border-box;
+}
+
+body{
+	/*background-color: #6efa9b;*/
+	/*background-color: #03e1be;*/
+	text-align: center;
+	font-size: 1.5em;
+}
+
+.hero-win-counter{
+	display: inline-block;
+	padding: 0.1em 1em;
+	border: 1px solid black;
+	border-radius: 28px;
+	margin: 0.5em;
+	background-color: black;
+	color: white;
+}
+
+.villain-win-counter{
+	display: inline-block;
+	padding: 0.1em 1em;
+	border: 1px solid black;
+	border-radius: 28px;
+	margin: 0.5em;
+	background-color: black;
+	color: white;
+}
+
+.display-player-turn{
+	display: inline-block;
+	padding: 0.1em 1em;
+	/*border: 1px solid black;*/
+	/*border-radius: 28px;*/
+	margin: 0.5em;
+}
+
+.game-board > * {
+	display: inline-block;
+	vertical-align: middle;
+/*	width: 33.3333%;
+	height: 33.3333%;*/
+/*	width: 25%;
+	height: 25%;*/
+	width: 20%;
+	height: 20%;
+	font-size: 2em;
+	text-align: center;
+	border: 0.1px solid black;
+	margin: 0 auto;
+}
+
+.game-board{
+	margin: 0 auto;
+	width: 200px;
+	height: 200px;
+}
+
+.game-board:hover{
+	transition: 0.5s;
+	cursor: pointer;
+	background-color: lightgrey;
+}
+
+.display-winner {
+	margin: 0.5em auto;
+	width: 200px;
+	height: 10px;
+	/*font-size: 2em;*/
+}
+
+.restart-game{
+	margin: 1em auto;
+	width: 200px;
+	padding: 0.2em;
+	border: 1px solid black;
+	border-radius: 28px;
+}
+
+.restart-game:hover{
+	transition: 0.5s;
+	cursor: pointer;
+	background-color: lightgrey;
+}
