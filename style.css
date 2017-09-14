@@ -13,26 +13,17 @@ body{
 	/*background-image: url("http://1.bp.blogspot.com/-l7ypa_KxQE4/VJnIsjUgd-I/AAAAAAAAEzQ/j-A7f3MPbqk/s1600/7.JPG");*/
 	/*background-image: url("https://i.pinimg.com/236x/ea/3e/4b/ea3e4beeec87f6027e29a4be43402a2b.jpg");*/
 
-	/*background-color: #6efa9b;*/
-	/*background-color: #03e1be;*/
-	
-	/*background-size: 50vh;*/
-	
-
-
 	background-color: #e2fffa;
 	text-align: center;
 	font-size: 4vh;
 
 }
 
-
 .game-won{
 	/*background-image: url("http://37.media.tumblr.com/ec117de56d935e12541c3e191a528c2d/tumblr_n5kuroiNXa1sjb4o2o1_500.gif");*/
 	background-image: url("https://static.tumblr.com/d9f9516ec7dfa6f00c098b4aa9260886/0jpjmtk/NQwnk70h8/tumblr_static_tumblr_static_6fzon246d7okwgggoo084skgw_640.gif");
 	background-size: 30vh;
 }
-
 
 .hero-win-counter{
 	display: inline-block;
@@ -113,9 +104,7 @@ body{
 	width: 30vh;
 	height: 10vh;
 	padding: 1em;
-	/*border: 1vh solid black;*/
 	color:#1d2937;
-	/*font-size: 6em;*/
 }
 
 .restart-game {
@@ -124,7 +113,6 @@ body{
 	padding: 0.2em;
 	border: 1px solid #1d2937;
 	border-radius: 3vh;
-
 	box-shadow: 0 0 30px 0px #1d2937;
 	background-image: url("https://i.pinimg.com/originals/e9/a4/3c/e9a43c8cf95ca2858580c790be584627.jpg");
 	background-size: 35vh;
@@ -135,13 +123,23 @@ body{
 .restart-game:hover{
 	transition: 0.5s;
 	cursor: pointer;
-
 	box-shadow: 0 0 20px 20px #e2fffa;	
 	background-image: url("");
 	background-color: #1d2937;
 	color:#eed4da;
 }
 
+.mute {
+	cursor: pointer;
+	color:#1d2937;
+	font-size: 4vh;
+	width: 3vh;
+	margin: 0 auto;
 
+}
+
+.mute:hover{
+	font-size: 5vh;
+}
 
 

@@ -1,7 +1,7 @@
 console.log("Tic-Tac-Tropical");
 
 // customisable variables
-var boardLength = 3;
+var boardLength = 4;
 var blankToken = " ";
 var heroToken = "X";
 var villainToken = "O";
@@ -208,9 +208,10 @@ gameBoardDiv.addEventListener("click", function(event){
 		event.target.textContent = returnPlayerToken();
 		numClicks++;
 
-		backgroundMusic.play();
-		cocoJambo.pause();
+		stopAudio(cocoJambo);
 		resetBackground();
+
+		backgroundMusic.play();
 		click.play();
 
 		updateBoard(boardArr);
@@ -261,7 +262,7 @@ restartGameDiv.addEventListener("click",function(){
 // --------------- Audio and Background ---------------  
 
 var backgroundMusic = new Audio('audio/coconut-lounge.mp3');
-// backgroundMusic.play();
+backgroundMusic.play();
 
 var click = new Audio('audio/buttonclick.mp3');
 // click.play();
@@ -271,6 +272,20 @@ var cocoJambo = new Audio('audio/coco-jambo-trim-single.mp3');
 
 var win = new Audio('audio/ta-da.mp3');
 // win.play();
+
+// audio ".stop()" function
+var stopAudio = function(audio){
+	audio.pause();
+	audio.currentTime = 0;
+}
+
+var celebration = function (){
+	win.play();
+	stopAudio(backgroundMusic);
+	cocoJambo.play();
+	gameWonBackground();
+	setTimeout(resetBackground,10000);
+}
 
 var body = document.querySelector("body");
 
@@ -282,13 +297,15 @@ var resetBackground = function(){
 	body.classList.remove("game-won");
 }
 
-var celebration = function (){
-	win.play();
-	backgroundMusic.pause();
-	cocoJambo.play();
-	gameWonBackground();
-	setTimeout(resetBackground,10000);
+
+
+var mute = document.querySelector(".mute");
+
+var toggleBackgroundMusic = function(){
+	backgroundMusic.volume = 0;
 }
 
-backgroundMusic.play();
+mute.addEventListener("click", function(){
+	backgroundMusic.volume=0;
+})
 

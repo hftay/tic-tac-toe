@@ -35,20 +35,14 @@ Chose option 2. as a simpler data structure makes it easier to compare game boar
 
 ## Things yet to do
 
--DEPLOY
+- Code Readability
 
-- Research web audio API add sound effects (TBC) to your game – add sound effects to tile hover...
-- yet to find a way to stop audio playing 
-- options are to either pause or mute audio, but wont achieve effect of audio starting from the beginning.
-
-- Readability
+- fix functionality for increasing/decreasing boardsize?
+BUG: grid tile creation is buggy, when resizing browser HEIGHT the tiles go crazy, need to refresh a couple of times... need to fix...
 
 - ux
 
-- fix functionality for increasing/decreasing boardsize?
-grid tile creation is buggy, when resizing browser the tiles go crazy, need to refresh a couple of times
-
-- CSS; research Active etc...
+- CSS; research CSS pseudo-classes etc...
 
 - CSS use different colours for different token...
 
@@ -65,6 +59,9 @@ Practise toggle?
 
 - Use timers to display "waiting..." messages while users are waiting to be matched
 
+- Research web audio API add sound effects (TBC) to your game – add sound effects to tile click...
+- yet to find a way to stop audio playing 
+- options are to either pause or mute audio, but wont achieve effect of audio starting from the beginning.
 
 + DONE - Keep track of multiple game rounds with a win counter
 + DONE – Create "Restart Game"
