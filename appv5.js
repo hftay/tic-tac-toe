@@ -2,20 +2,20 @@ console.log("Tic-Tac-Tropical");
 
 // customisable variables
 var boardLength = 3;
+var boardvhRatio = 0.45;
 var blankToken = " ";
 var heroToken = "X";
 var villainToken = "O";
 
 // initialise variables
-var numMatchesToWin = boardLength;
+var numTokensToWinPerRow = boardLength;
 var heroWinCounter = 0;
 var villainWinCounter = 0;
 var heroTurn = 1;
-
 var maxMoves = Math.pow(boardLength,2); // for working out draw situations
 var numMoves = 0;
 
-var displayBoard = function(tokenType){
+var generateBoardArr = function(tokenType){
 	var boardArr =[];
 	for (i=0; i<boardLength; i++){
 		var lineStr = tokenType.repeat(boardLength);
@@ -25,7 +25,13 @@ var displayBoard = function(tokenType){
 	return boardArr;
 }
 
-var returnPlayerToken = function(){
+var boardArr = generateBoardArr(blankToken);
+var heroWinBoard = generateBoardArr(heroToken);
+var villainWinBoard = generateBoardArr (villainToken);
+
+// --------------- JS Related Functions --------------- 
+
+var currentPlayerToken = function(){
 	if(heroTurn===1){
 		playerToken=heroToken;
 	} else {
@@ -34,24 +40,24 @@ var returnPlayerToken = function(){
 	return playerToken;
 }
 
-var checkNumsMatchesAchieved = function(heroCounter, villainCounter){
-	if(heroCounter===numMatchesToWin || villainCounter===numMatchesToWin){
+var checkEnoughTokensForWin = function(heroTokenCount, villainTokenCount){
+	if(heroTokenCount===numTokensToWinPerRow || villainTokenCount===numTokensToWinPerRow){
 		return true;
 	}
 }
 
 var checkHorizontalWins = function(){
-	for(row=0; row<boardArr.length; row++){
-		var heroCounter=0;
-		var villainCounter=0;
+	for(row=0; row<boardArr.length; row++){ //hold row constant, check each col elem
+		var heroTokenCount=0;
+		var villainTokenCount=0;
 		for(col=0; col<boardArr.length; col++){
 			if(boardArr[row][col] === heroWinBoard[row][col]){
-				heroCounter++;
+				heroTokenCount++;
 			} else if(boardArr[row][col] === villainWinBoard[row][col]){
-				villainCounter++;
+				villainTokenCount++;
 			}
 		}
-		if(checkNumsMatchesAchieved(heroCounter,villainCounter)===true){
+		if(checkEnoughTokensForWin(heroTokenCount,villainTokenCount)===true){
 			console.log("horizontal win");
 			return true
 		}
@@ -60,17 +66,17 @@ var checkHorizontalWins = function(){
 }
 
 var checkVerticalWins = function(){
-	for(col=0; col<boardArr.length; col++){
-		var heroCounter=0;
-		var villainCounter=0;
+	for(col=0; col<boardArr.length; col++){ //hold col constant, check each row elem
+		var heroTokenCount=0;
+		var villainTokenCount=0;
 		for(row=0; row<boardArr.length; row++){
 			if(boardArr[row][col] === heroWinBoard[row][col]){
-				heroCounter++;
+				heroTokenCount++;
 			} else if(boardArr[row][col] === villainWinBoard[row][col]){
-				villainCounter++;
+				villainTokenCount++;
 			}
 		}
-		if(checkNumsMatchesAchieved(heroCounter,villainCounter)===true){
+		if(checkEnoughTokensForWin(heroTokenCount,villainTokenCount)===true){
 			console.log("vertical win");
 			return true
 		}
@@ -79,16 +85,16 @@ var checkVerticalWins = function(){
 }
 
 var checkLeadingDiagonalWins = function(){
-	var heroCounter=0;
-	var villainCounter=0;
+	var heroTokenCount=0;
+	var villainTokenCount=0;
 	for (i=0; i<boardArr.length; i++){
 		if(boardArr[i][i] === heroWinBoard[i][i]){
-			heroCounter++;
+			heroTokenCount++;
 		} else if (boardArr[i][i] === villainWinBoard[i][i]){
-			villainCounter++;
+			villainTokenCount++;
 		}
 	}
-	if(checkNumsMatchesAchieved(heroCounter,villainCounter)===true){
+	if(checkEnoughTokensForWin(heroTokenCount,villainTokenCount)===true){
 		console.log("leading diagonal win");
 		return true
 	}
@@ -96,17 +102,17 @@ var checkLeadingDiagonalWins = function(){
 }
 
 var checkSkewDiagonalWins = function(){
-	var heroCounter=0;
-	var villainCounter=0;
-	var max = boardArr.length-1; // for a 3x3 grid returns 2
+	var heroTokenCount=0;
+	var villainTokenCount=0;
+	var maxArrayIndex = boardArr.length-1; // for a 3x3 grid returns 2
 	for(i=0; i<boardArr.length; i++){
-		if(boardArr[max-i][i]===heroWinBoard[max-i][i]){
-			heroCounter++;
-		} else if (boardArr[max-i][i]===villainWinBoard[max-i][i]){
-			villainCounter++;
+		if(boardArr[maxArrayIndex-i][i]===heroWinBoard[maxArrayIndex-i][i]){
+			heroTokenCount++;
+		} else if (boardArr[maxArrayIndex-i][i]===villainWinBoard[maxArrayIndex-i][i]){
+			villainTokenCount++;
 		}
 	}
-	if(checkNumsMatchesAchieved(heroCounter,villainCounter)===true){
+	if(checkEnoughTokensForWin(heroTokenCount,villainTokenCount)===true){
 		console.log("skew diagonal win");
 		return true
 	}
@@ -120,11 +126,7 @@ var isWon = function(){
 	return false;
 }
 
-var boardArr = displayBoard(blankToken);
-var heroWinBoard = displayBoard(heroToken);
-var villainWinBoard = displayBoard (villainToken);
-
-// --------------- DOM Related --------------- 
+// --------------- DOM Related Functions --------------- 
 var body = document.querySelector("body");
 var gameBoardDiv = document.querySelector(".game-board");
 var displayWinnerDiv = document.querySelector(".display-winner");
@@ -133,42 +135,17 @@ var heroWinCounterDiv = document.querySelector(".hero-win-counter");
 var villainWinCounterDiv = document.querySelector(".villain-win-counter");
 var restartGameDiv = document.querySelector(".restart-game");
 var mute = document.querySelector(".mute");
+var increaseBoardSize = document.querySelector(".increase-board-size");
+var decreaseBoardSize = document.querySelector(".decrease-board-size");
 
-var calculateTileSize = function(){
-	var numOfTilesPerRow = boardLength;
-	// var widthOfBoard = gameBoardDiv.offsetWidth;
-	var widthOfBoard = window.innerHeight*0.45;
-	var widthOfEachTile = (widthOfBoard) / numOfTilesPerRow;
-	return 0.99999999*widthOfEachTile; // 0.999 to account for padding
+var makeNewBoard = function(pauseDuration){
+	emptyBoardArr(boardArr); // this step is requred, otherwise only the DOM game-board is updated
+	setTimeout(resetGameDisplay,pauseDuration); //
+	setTimeout(generateBlankDomBoard,pauseDuration);
+	numMoves = 0;
 }
 
-var generateBlankBoard = function(){
-	gameBoardDiv.innerHTML=""; //clear board so it doesn't stack
-	
-	for (i=0; i<boardLength; i++){
-		for(j=0; j<boardLength; j++){
-			var tile = document.createElement("div");
-			tile.dataset.row= i; 
-			tile.dataset.col= j; //creates a data attribute called col
-			tile.className = "tile";
-			gameBoardDiv.appendChild(tile);
-		}
-	}
-// To  define size of tiles when board length is change, must be placed after generateBoard()
-	var gameBoardDivChildrenList = document.querySelectorAll(".tile");
-	var widthOfEachTile = calculateTileSize();
-	gameBoardDivChildrenList.forEach(function(value){
-		value.style.width = widthOfEachTile+"px";
-		value.style.height = widthOfEachTile+"px";
-		value.style.fontSize = widthOfEachTile+"px";
-	})
-}
-
-var addPlayerTokenToTile = function(board){
-	board[event.target.dataset.row][event.target.dataset.col] = event.target.textContent;
-}
-
-var cleanBoardArr = function(board){
+var emptyBoardArr = function(board){
 	for (row=0; row<boardLength; row++){
 		for(col=0; col<boardLength; col++){
 			board[row][col] = " ";
@@ -183,74 +160,92 @@ var resetGameDisplay = function(){
 	displayWinnerDiv.textContent = "";
 }
 
-var makeNewBoard = function(pauseTime){
-	cleanBoardArr(boardArr); // this step is requred, otherwise only the DOM game-board is updated
-	setTimeout(resetGameDisplay,pauseTime); //
-	setTimeout(generateBlankBoard,pauseTime);
-	numMoves = 0;
+var calcBoardTileSize = function(){
+	var numOfTilesPerRow = boardLength;
+	// var widthOfBoard = gameBoardDiv.offsetWidth;
+	var widthOfBoard = window.innerHeight*boardvhRatio;
+	var widthOfEachBoardTile = (widthOfBoard) / numOfTilesPerRow;
+	return widthOfEachBoardTile;
 }
 
-var restartGame = function(){
-	heroWinCounter=0;
-	villainWinCounter=0;
-	heroWinCounterDiv.textContent = heroToken + " : " + 	heroWinCounter;
-	villainWinCounterDiv.textContent = villainToken + " : " + villainWinCounter;
-	makeNewBoard(0);
+var generateBlankDomBoard = function(){
+	gameBoardDiv.innerHTML=""; //clear board so it doesn't stack
+	
+	// generate x number of div tiles depending on board size
+	for (boardTileRow=0; boardTileRow<boardLength; boardTileRow++){
+		for(boardTileCol=0; boardTileCol<boardLength; boardTileCol++){
+			var tile = document.createElement("div");
+			tile.dataset.row= boardTileRow; //creates a data attribute called row
+			tile.dataset.col= boardTileCol; //creates a data attribute called col
+			tile.className = "tile";
+			gameBoardDiv.appendChild(tile);
+		}
+	}
+	// to set tile width, must be placed after generateBoard()
+	var gameBoardDivChildrenList = document.querySelectorAll(".tile");
+	var widthOfEachBoardTile = calcBoardTileSize();
+	gameBoardDivChildrenList.forEach(function(value){
+		value.style.width = widthOfEachBoardTile+"px";
+		value.style.height = widthOfEachBoardTile+"px";
+		value.style.fontSize = widthOfEachBoardTile+"px";
+	})
+}
+
+var addPlayerTokenToTile = function(board){
+	board[event.target.dataset.row][event.target.dataset.col] = event.target.textContent;
+}
+
+var reinitialiseGlobalVars = function (){
+	boardArr = generateBoardArr(blankToken);
+	heroWinBoard = generateBoardArr(heroToken);
+	villainWinBoard = generateBoardArr (villainToken);
+	numTokensToWinPerRow = boardLength;
+	heroTurn = 1;
+	maxMoves = Math.pow(boardLength,2);
+	numMoves = 0;
 }
 
 // --------------- Game Event Listeners --------------- 
 
 gameBoardDiv.addEventListener("click", function(event){
+	stopCelebration();
 
-	// if tile clicked is empty
-	if (event.target.textContent===""){
-		event.target.textContent = returnPlayerToken();
+	if (event.target.textContent===""){ // only proceed if tile clicked is empty of content
+		click.play();
+		event.target.textContent = currentPlayerToken();
+		addPlayerTokenToTile(boardArr);
 		numMoves++;
 
-		stopCelebration();
-
-		click.play();
-		addPlayerTokenToTile(boardArr);
-
-		// if game is won
-		if(isWon()===true){
+		if(isWon()===true){ // if game is won
+			startCelebration();
+			displayWinnerDiv.textContent = currentPlayerToken() + " WINNER!";
+			makeNewBoard(2500);
 			displayPlayerTurnDiv.textContent = "GAME OVER";
-			displayWinnerDiv.textContent = returnPlayerToken() + " WINNER!";
-			if(returnPlayerToken()===heroToken){
+
+			if(currentPlayerToken()===heroToken){
 				heroWinCounter++;
-				heroWinCounterDiv.textContent = heroToken + " : " + 	heroWinCounter;
-				startCelebration();
+				heroWinCounterDiv.textContent = heroToken + " : " + heroWinCounter;
 			} else {
 				villainWinCounter++;
 				villainWinCounterDiv.textContent = villainToken + " : " + villainWinCounter;
-				startCelebration();
 			}
-		makeNewBoard(2500);
 		} 
-		// if game is not won, switch player
-		else {
+		else if (numMoves===maxMoves) { // check draw, make new board
+			displayPlayerTurnDiv.textContent = "GAME OVER";
+			displayWinnerDiv.textContent = "DRAW!";
+			makeNewBoard(2500);
+		}		
+		else { // if game is not won and not draw, switch player
 			heroTurn = -heroTurn;
-			displayPlayerTurnDiv.textContent = returnPlayerToken() + " TURN";
+			displayPlayerTurnDiv.textContent = currentPlayerToken() + " TURN";
 		}
 	} 
-
-	// if tile clicked already has content, disable the cell, do not change
-	else {
-		event.target.textContent = event.target.textContent;
-		stopCelebration();
-	}
-	
-	// if draw, make new board
-	if(numMoves===maxMoves){
-		displayPlayerTurnDiv.textContent = "GAME OVER";
-		displayWinnerDiv.textContent = "DRAW!";
-		makeNewBoard(2500);
-	}
-
 });
 
 restartGameDiv.addEventListener("click",function(){
-	restartGame();
+	click.play();
+	stopCelebration();
+	makeNewBoard(0);
 })
 
 mute.addEventListener("click", function(event){
@@ -265,6 +260,23 @@ mute.addEventListener("click", function(event){
 	}
 })
 
+increaseBoardSize.addEventListener("click", function(){
+	if(boardLength<9){
+		click.play();
+		boardLength++;
+		reinitialiseGlobalVars();
+		makeNewBoard();
+	}
+})
+
+decreaseBoardSize.addEventListener("click", function(){
+	if(boardLength>2){
+		click.play();
+		boardLength--;
+		reinitialiseGlobalVars();
+		makeNewBoard();
+	}
+})
 
 // --------------- Audio and Background ---------------  
 
@@ -284,7 +296,7 @@ var startCelebration = function (){
 	win.play();
 	stopAudio(backgroundMusic);
 	cocoJambo.play();
-	gameWonBackground();
+	displayGameWonBackground();
 	setTimeout(resetBackground,9500);
 }
 
@@ -294,7 +306,7 @@ var stopCelebration = function(){
 	backgroundMusic.play();
 }
 
-var gameWonBackground = function(){
+var displayGameWonBackground = function(){
 	body.classList.add("game-won");
 }
 
