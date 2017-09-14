@@ -1,7 +1,7 @@
 console.log("Tic-Tac-Tropical");
 
 // customisable variables
-var boardLength = 4;
+var boardLength = 3;
 var blankToken = " ";
 var heroToken = "X";
 var villainToken = "O";
@@ -13,7 +13,7 @@ var villainWinCounter = 0;
 var heroTurn = 1;
 
 var maxMoves = Math.pow(boardLength,2); // for working out draw situations
-var numClicks = 0;
+var numMoves = 0;
 
 var displayBoard = function(tokenType){
 	var boardArr =[];
@@ -125,22 +125,26 @@ var heroWinBoard = displayBoard(heroToken);
 var villainWinBoard = displayBoard (villainToken);
 
 // --------------- DOM Related --------------- 
+var body = document.querySelector("body");
 var gameBoardDiv = document.querySelector(".game-board");
 var displayWinnerDiv = document.querySelector(".display-winner");
 var displayPlayerTurnDiv = document.querySelector(".display-player-turn");
 var heroWinCounterDiv = document.querySelector(".hero-win-counter");
 var villainWinCounterDiv = document.querySelector(".villain-win-counter");
 var restartGameDiv = document.querySelector(".restart-game");
+var mute = document.querySelector(".mute");
 
 var calculateTileSize = function(){
 	var numOfTilesPerRow = boardLength;
-	var widthOfBoard = gameBoardDiv.offsetWidth;
+	// var widthOfBoard = gameBoardDiv.offsetWidth;
+	var widthOfBoard = window.innerHeight*0.45;
 	var widthOfEachTile = (widthOfBoard) / numOfTilesPerRow;
-	return 0.999*widthOfEachTile; // 0.999 to account for padding
+	return 0.99999999*widthOfEachTile; // 0.999 to account for padding
 }
 
 var generateBlankBoard = function(){
-	gameBoardDiv.innerHTML=""; //clear board so it doesn't loop
+	gameBoardDiv.innerHTML=""; //clear board so it doesn't stack
+	
 	for (i=0; i<boardLength; i++){
 		for(j=0; j<boardLength; j++){
 			var tile = document.createElement("div");
@@ -150,9 +154,7 @@ var generateBlankBoard = function(){
 			gameBoardDiv.appendChild(tile);
 		}
 	}
-
-// To allow board to be custom sized without changing tile dimensions
-// must be AFTER generateBoard() is called
+// To  define size of tiles when board length is change, must be placed after generateBoard()
 	var gameBoardDivChildrenList = document.querySelectorAll(".tile");
 	var widthOfEachTile = calculateTileSize();
 	gameBoardDivChildrenList.forEach(function(value){
@@ -162,11 +164,11 @@ var generateBlankBoard = function(){
 	})
 }
 
-var updateBoard = function(board){
+var addPlayerTokenToTile = function(board){
 	board[event.target.dataset.row][event.target.dataset.col] = event.target.textContent;
 }
 
-var clearBoardArr = function(board){
+var cleanBoardArr = function(board){
 	for (row=0; row<boardLength; row++){
 		for(col=0; col<boardLength; col++){
 			board[row][col] = " ";
@@ -182,12 +184,10 @@ var resetGameDisplay = function(){
 }
 
 var makeNewBoard = function(pauseTime){
-	clearBoardArr(boardArr); // this step is requred, otherwise only the DOM game-board is updated
+	cleanBoardArr(boardArr); // this step is requred, otherwise only the DOM game-board is updated
 	setTimeout(resetGameDisplay,pauseTime); //
 	setTimeout(generateBlankBoard,pauseTime);
-	numClicks = 0;
-	heroWinCounterDiv.classList.remove("blink");
-	villainWinCounterDiv.classList.remove("blink");
+	numMoves = 0;
 }
 
 var restartGame = function(){
@@ -198,23 +198,19 @@ var restartGame = function(){
 	makeNewBoard(0);
 }
 
-// --------------- Event Listeners --------------- 
-makeNewBoard(0);
+// --------------- Game Event Listeners --------------- 
 
 gameBoardDiv.addEventListener("click", function(event){
 
 	// if tile clicked is empty
 	if (event.target.textContent===""){
 		event.target.textContent = returnPlayerToken();
-		numClicks++;
+		numMoves++;
 
-		stopAudio(cocoJambo);
-		resetBackground();
+		stopCelebration();
 
-		backgroundMusic.play();
 		click.play();
-
-		updateBoard(boardArr);
+		addPlayerTokenToTile(boardArr);
 
 		// if game is won
 		if(isWon()===true){
@@ -223,16 +219,14 @@ gameBoardDiv.addEventListener("click", function(event){
 			if(returnPlayerToken()===heroToken){
 				heroWinCounter++;
 				heroWinCounterDiv.textContent = heroToken + " : " + 	heroWinCounter;
-				celebration();
-
+				startCelebration();
 			} else {
 				villainWinCounter++;
 				villainWinCounterDiv.textContent = villainToken + " : " + villainWinCounter;
-				celebration();
+				startCelebration();
 			}
-		makeNewBoard(1500);
+		makeNewBoard(2500);
 		} 
-
 		// if game is not won, switch player
 		else {
 			heroTurn = -heroTurn;
@@ -243,13 +237,14 @@ gameBoardDiv.addEventListener("click", function(event){
 	// if tile clicked already has content, disable the cell, do not change
 	else {
 		event.target.textContent = event.target.textContent;
+		stopCelebration();
 	}
 	
 	// if draw, make new board
-	if(numClicks===maxMoves){
+	if(numMoves===maxMoves){
 		displayPlayerTurnDiv.textContent = "GAME OVER";
 		displayWinnerDiv.textContent = "DRAW!";
-		makeNewBoard(1500);
+		makeNewBoard(2500);
 	}
 
 });
@@ -258,20 +253,26 @@ restartGameDiv.addEventListener("click",function(){
 	restartGame();
 })
 
+mute.addEventListener("click", function(event){
+	if (event.target.dataset.clicked==="false"){
+		backgroundMusic.volume=0;
+		event.target.classList.add("unmute"); 
+		mute.dataset.clicked = true;
+	} else {
+		backgroundMusic.volume=1; 
+		mute.dataset.clicked = false;
+		event.target.classList.remove("unmute"); 
+	}
+})
+
 
 // --------------- Audio and Background ---------------  
 
+// audio files 
 var backgroundMusic = new Audio('audio/coconut-lounge.mp3');
-backgroundMusic.play();
-
 var click = new Audio('audio/buttonclick.mp3');
-// click.play();
-
 var cocoJambo = new Audio('audio/coco-jambo-trim-single.mp3');
-// cocoJambo.play();
-
 var win = new Audio('audio/ta-da.mp3');
-// win.play();
 
 // audio ".stop()" function
 var stopAudio = function(audio){
@@ -279,15 +280,19 @@ var stopAudio = function(audio){
 	audio.currentTime = 0;
 }
 
-var celebration = function (){
+var startCelebration = function (){
 	win.play();
 	stopAudio(backgroundMusic);
 	cocoJambo.play();
 	gameWonBackground();
-	setTimeout(resetBackground,10000);
+	setTimeout(resetBackground,9500);
 }
 
-var body = document.querySelector("body");
+var stopCelebration = function(){
+	stopAudio(cocoJambo);
+	resetBackground();
+	backgroundMusic.play();
+}
 
 var gameWonBackground = function(){
 	body.classList.add("game-won");
@@ -297,15 +302,7 @@ var resetBackground = function(){
 	body.classList.remove("game-won");
 }
 
+makeNewBoard(0);
+backgroundMusic.play();
 
-
-var mute = document.querySelector(".mute");
-
-var toggleBackgroundMusic = function(){
-	backgroundMusic.volume = 0;
-}
-
-mute.addEventListener("click", function(){
-	backgroundMusic.volume=0;
-})
 

@@ -4,12 +4,7 @@
 
 body{
 
-	/*background-image: url("https://i.pinimg.com/originals/9b/46/91/9b4691caed52c631bb27ca91cf9327ad.jpg");*/
 	/*background-image: url("https://i.pinimg.com/736x/a1/60/02/a16002fad10ba053050f05a24b3ec7a5.jpg"); */
-	/*background-image: url("https://i.pinimg.com/236x/a2/05/50/a205500c34ced3bb434f87222d4473fc--pineapple-wallpaper-tropical-pattern.jpg");*/
-	/*background-image: url("https://i.pinimg.com/236x/24/9c/41/249c41ca9b8d298f4d34feebcb2d8b7b.jpg");*/
-	/*background-image: url("https://i.pinimg.com/originals/e9/a4/3c/e9a43c8cf95ca2858580c790be584627.jpg");*/
-	
 	/*background-image: url("http://1.bp.blogspot.com/-l7ypa_KxQE4/VJnIsjUgd-I/AAAAAAAAEzQ/j-A7f3MPbqk/s1600/7.JPG");*/
 	/*background-image: url("https://i.pinimg.com/236x/ea/3e/4b/ea3e4beeec87f6027e29a4be43402a2b.jpg");*/
 
@@ -20,7 +15,6 @@ body{
 }
 
 .game-won{
-	/*background-image: url("http://37.media.tumblr.com/ec117de56d935e12541c3e191a528c2d/tumblr_n5kuroiNXa1sjb4o2o1_500.gif");*/
 	background-image: url("https://static.tumblr.com/d9f9516ec7dfa6f00c098b4aa9260886/0jpjmtk/NQwnk70h8/tumblr_static_tumblr_static_6fzon246d7okwgggoo084skgw_640.gif");
 	background-size: 30vh;
 }
@@ -78,7 +72,7 @@ body{
 	transition: 0.3s;
 	cursor: pointer;
 	background-image: url("https://i.pinimg.com/736x/a1/60/02/a16002fad10ba053050f05a24b3ec7a5.jpg"); 
-	background-size: 9vh;
+	background-size: 5vh;
 	color: #1e2a38;
 }
 
@@ -86,11 +80,10 @@ body{
 	display: inline-block;
 	vertical-align: top;
 	text-align: center;
-/*	width: 15vh;
+	width: 15vh;
 	height: 15vh;
-	font-size: 15vh;*/
+	font-size: 15vh;
 	border: 0.1px solid #1d2937;
-	box-shadow: 0 0 3px 0.5px #e2fffa;
 }
 
 .tile:hover {
@@ -100,11 +93,12 @@ body{
 
 .display-winner {
 	display: inline-block;
-	margin: 1vh auto;
+	margin: 0 auto;
+	margin-top: 0.5vh;
 	width: 30vh;
-	height: 10vh;
-	padding: 1em;
+	height: 4vh;
 	color:#1d2937;
+	/*border: 1px solid black;*/
 }
 
 .restart-game {
@@ -130,16 +124,25 @@ body{
 }
 
 .mute {
+
 	cursor: pointer;
 	color:#1d2937;
 	font-size: 4vh;
 	width: 3vh;
+	height: 3vh;
 	margin: 0 auto;
-
+	background-image: url("http://www.iconsdb.com/icons/preview/black/volume-up-4-xxl.png");
+	background-size: 3vh;
 }
 
 .mute:hover{
-	font-size: 5vh;
+	width: 3.5vh;
+	height: 3.5vh;
+	background-size: 3.5vh;
+}
+
+.unmute{
+	background-image: url("http://www.iconsdb.com/icons/preview/black/mute-2-xxl.png");
 }
 
 

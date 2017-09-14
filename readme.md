@@ -1,8 +1,8 @@
 # Tic-Tac-Tropical
 
 ## Objective
-* two player take turns to place token on a gameboard (size customisable)
-* first player to create a line of their tokens the length of the board wins
+* two player take turns to place token on a gameboard
+* winner is the first player to create a line of their tokens the length of the board
 
 ## Technologies used
 * HTML, CSS, Javascript
@@ -37,37 +37,28 @@ Chose option 2. as a simpler data structure makes it easier to compare game boar
 
 - Code Readability
 
-- fix functionality for increasing/decreasing boardsize?
-BUG: grid tile creation is buggy, when resizing browser HEIGHT the tiles go crazy, need to refresh a couple of times... need to fix...
+- BUG: grid tile creation is buggy, when resizing browser HEIGHT the tiles go out of sync, refreshing page sometimes fixes the problem but not always... investigate use of media query?
 
 - ux
+
+- Styling for display-winner div to make it more prominent...
 
 - CSS; research CSS pseudo-classes etc...
 
 - CSS use different colours for different token...
 
-- Try new things for CSS; 
-Practise toggle?
-
-- add classlist to winner counter to blink when a game is won
-
-- A readme.md file with explanations of the technologies used, the approach taken, installation instructions, unsolved problems, etc.
-
-- Allow game customizable options, time limits (TBA), board size (OK), game rounds, name & profiles etc
+- Add classlist to winner's score counter display to blink when a game is won
 
 - Research LocalStorage or SessionStorage to persist data locally to allow games to continue after page refresh or loss of internet connectivity
 
 - Use timers to display "waiting..." messages while users are waiting to be matched
 
-- Research web audio API add sound effects (TBC) to your game – add sound effects to tile click...
-- yet to find a way to stop audio playing 
-- options are to either pause or mute audio, but wont achieve effect of audio starting from the beginning.
-
++ DONE – added audio: sound effects to tile click, background music and winner music
 + DONE - Keep track of multiple game rounds with a win counter
 + DONE – Create "Restart Game"
 + DONE – Incorporate logic for "Draw" situations
 + DONE – Locked tiles that have already been clicked on!
-+ DONE – if win, add class to background banana gif
++ DONE – if game won, set background to banana dancing gif
 
 
 
