@@ -1,4 +1,4 @@
-# Tropical-Tic-Tac-Toe
+# Tic-Tac-Tropical
 
 ## Objective
 * two player take turns to place token on a gameboard (size customisable)
@@ -35,18 +35,27 @@ Chose option 2. as a simpler data structure makes it easier to compare game boar
 
 ## Things yet to do
 
-- fix functionality for increasing/decreasing boardsize?
+-DEPLOY
 
-- CSS; try using active, classList etc
-
-- CSS two different colours for different token
-
-- Research web audio API and add sound effects to your game
+- Research web audio API add sound effects (TBC) to your game – add sound effects to tile hover...
+- yet to find a way to stop audio playing 
+- options are to either pause or mute audio, but wont achieve effect of audio starting from the beginning.
 
 - Readability
 
+- ux
+
+- fix functionality for increasing/decreasing boardsize?
+grid tile creation is buggy, when resizing browser the tiles go crazy, need to refresh a couple of times
+
+- CSS; research Active etc...
+
+- CSS use different colours for different token...
+
 - Try new things for CSS; 
 Practise toggle?
+
+- add classlist to winner counter to blink when a game is won
 
 - A readme.md file with explanations of the technologies used, the approach taken, installation instructions, unsolved problems, etc.
 
@@ -61,5 +70,7 @@ Practise toggle?
 + DONE – Create "Restart Game"
 + DONE – Incorporate logic for "Draw" situations
 + DONE – Locked tiles that have already been clicked on!
++ DONE – if win, add class to background banana gif
+
 
 

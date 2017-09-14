@@ -1,7 +1,7 @@
-console.log("TICTACTOE");
+console.log("Tic-Tac-Tropical");
 
 // customisable variables
-var boardLength = 5;
+var boardLength = 3;
 var blankToken = " ";
 var heroToken = "X";
 var villainToken = "O";
@@ -12,7 +12,7 @@ var heroWinCounter = 0;
 var villainWinCounter = 0;
 var heroTurn = 1;
 
-var maxClicks = Math.pow(boardLength,2); // for working out draw situations
+var maxMoves = Math.pow(boardLength,2); // for working out draw situations
 var numClicks = 0;
 
 var displayBoard = function(tokenType){
@@ -50,7 +50,6 @@ var checkHorizontalWins = function(){
 			} else if(boardArr[row][col] === villainWinBoard[row][col]){
 				villainCounter++;
 			}
-			
 		}
 		if(checkNumsMatchesAchieved(heroCounter,villainCounter)===true){
 			console.log("horizontal win");
@@ -99,7 +98,7 @@ var checkLeadingDiagonalWins = function(){
 var checkSkewDiagonalWins = function(){
 	var heroCounter=0;
 	var villainCounter=0;
-	var max = boardArr.length-1; // for 3x3 grid returns 2
+	var max = boardArr.length-1; // for a 3x3 grid returns 2
 	for(i=0; i<boardArr.length; i++){
 		if(boardArr[max-i][i]===heroWinBoard[max-i][i]){
 			heroCounter++;
@@ -133,16 +132,11 @@ var heroWinCounterDiv = document.querySelector(".hero-win-counter");
 var villainWinCounterDiv = document.querySelector(".villain-win-counter");
 var restartGameDiv = document.querySelector(".restart-game");
 
-var increaseBoardSize = document.querySelector(".increase-board-size");
-var decreaseBoardSize = document.querySelector(".decrease-board-size");
-
-
-
 var calculateTileSize = function(){
 	var numOfTilesPerRow = boardLength;
 	var widthOfBoard = gameBoardDiv.offsetWidth;
 	var widthOfEachTile = (widthOfBoard) / numOfTilesPerRow;
-	return widthOfEachTile;
+	return 0.999*widthOfEachTile; // 0.999 to account for padding
 }
 
 var generateBlankBoard = function(){
@@ -188,11 +182,12 @@ var resetGameDisplay = function(){
 }
 
 var makeNewBoard = function(pauseTime){
-	var displayTime = pauseTime // in millisecs
 	clearBoardArr(boardArr); // this step is requred, otherwise only the DOM game-board is updated
-	setTimeout(resetGameDisplay,displayTime); //
-	setTimeout(generateBlankBoard,displayTime);
+	setTimeout(resetGameDisplay,pauseTime); //
+	setTimeout(generateBlankBoard,pauseTime);
 	numClicks = 0;
+	heroWinCounterDiv.classList.remove("blink");
+	villainWinCounterDiv.classList.remove("blink");
 }
 
 var restartGame = function(){
@@ -200,24 +195,11 @@ var restartGame = function(){
 	villainWinCounter=0;
 	heroWinCounterDiv.textContent = heroToken + " : " + 	heroWinCounter;
 	villainWinCounterDiv.textContent = villainToken + " : " + villainWinCounter;
+	makeNewBoard(0);
 }
 
 // --------------- Event Listeners --------------- 
-generateBlankBoard();
-resetGameDisplay();
-
-// increaseBoardSize.addEventListener("click", function(){
-// 	clearBoardArr(boardArr);
-// 	boardLength++; // max 9x9
-// 	// makeNewBoard(0); // 1500ms
-// 	generateBlankBoard();
-// 	updateBoard(boardArr);
-
-// })
-
-// decreaseBoardSize.addEventListener("click", function(){
-// 	boardLength--; // min 2x2
-// })
+makeNewBoard(0);
 
 gameBoardDiv.addEventListener("click", function(event){
 
@@ -225,6 +207,11 @@ gameBoardDiv.addEventListener("click", function(event){
 	if (event.target.textContent===""){
 		event.target.textContent = returnPlayerToken();
 		numClicks++;
+
+		backgroundMusic.play();
+		cocoJambo.pause();
+		resetBackground();
+		click.play();
 
 		updateBoard(boardArr);
 
@@ -235,13 +222,16 @@ gameBoardDiv.addEventListener("click", function(event){
 			if(returnPlayerToken()===heroToken){
 				heroWinCounter++;
 				heroWinCounterDiv.textContent = heroToken + " : " + 	heroWinCounter;
+				celebration();
+
 			} else {
 				villainWinCounter++;
 				villainWinCounterDiv.textContent = villainToken + " : " + villainWinCounter;
+				celebration();
 			}
 		makeNewBoard(1500);
-
 		} 
+
 		// if game is not won, switch player
 		else {
 			heroTurn = -heroTurn;
@@ -255,11 +245,10 @@ gameBoardDiv.addEventListener("click", function(event){
 	}
 	
 	// if draw, make new board
-	if(numClicks===maxClicks){
+	if(numClicks===maxMoves){
 		displayPlayerTurnDiv.textContent = "GAME OVER";
 		displayWinnerDiv.textContent = "DRAW!";
 		makeNewBoard(1500);
-
 	}
 
 });
@@ -269,7 +258,37 @@ restartGameDiv.addEventListener("click",function(){
 })
 
 
+// --------------- Audio and Background ---------------  
 
+var backgroundMusic = new Audio('audio/coconut-lounge.mp3');
+// backgroundMusic.play();
 
+var click = new Audio('audio/buttonclick.mp3');
+// click.play();
 
+var cocoJambo = new Audio('audio/coco-jambo-trim-single.mp3');
+// cocoJambo.play();
+
+var win = new Audio('audio/ta-da.mp3');
+// win.play();
+
+var body = document.querySelector("body");
+
+var gameWonBackground = function(){
+	body.classList.add("game-won");
+}
+
+var resetBackground = function(){
+	body.classList.remove("game-won");
+}
+
+var celebration = function (){
+	win.play();
+	backgroundMusic.pause();
+	cocoJambo.play();
+	gameWonBackground();
+	setTimeout(resetBackground,10000);
+}
+
+backgroundMusic.play();
 
