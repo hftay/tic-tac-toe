@@ -1,8 +1,10 @@
 # Tic-Tac-Tropical
+#### play a game of tropical tic-tac-toe at: https://hftay.github.io/tic-tac-toe/  
 
 ## Objective
 * two player take turns to place their token on a gameboard
 * first player to create a row of tokens the length of the board wins
+* size of gameboard customisable in browser
 
 ## Technologies used:
 * HTML5, CSS3, Javascript
@@ -23,31 +25,20 @@
        * switch player turn   
        * return to step 2
 
-## Data-structure selection 
-Considerations  
-1. array of array (of objects) -- allows tracking of whether a tile has been picked using array object
-* e.g.		Board: [ [{}], [{}], [{}] ]  
-* where the objects are {token: "playertoken", picked: "true/false"} 
-2. array of array (of strings) -- allows easy comparison of array contents
-* e.g. 		Board: [ [""], [""], [""] ]
-
-Chose option 2. as a simpler data structure makes it easier to compare game board against winnning boards
-
 ## Things yet to do
 
 - Fix bug:
-- Display is buggy when viewed using phone browser
-- Resizing browser Height causes board tiles to go wonky (due to vh being used?), refreshing page sometimes fixes the problem, but not always... investigate use of media query?
+  - Display is buggy when viewed using phone browser
+  - Resizing browser Height causes board tiles to go wonky (due to vh being used?), refreshing page sometimes fixes the problem, but not always... investigate use of media query?
 
 - improve ux
-- CSS use different colours for different token...
-- CSS: Styling for display-winner div to make it more prominent...
-- Add classlist to winner's score counter display to blink when a game is won
+  - CSS use different colours for different token...
+  - CSS: Styling for display-winner div to make it more prominent...
+  - Add classlist to winner's score counter display to blink when a game is won
 
 - Research LocalStorage or SessionStorage to persist data locally to allow games to continue after page refresh or loss of internet connectivity
 
-– Add functionality for playing against PC
-
+– Add functionality for playing against PC  
 - Use timers to display "waiting..." messages while users are waiting to be matched
 
 + DONE – added feature to allow resizing of board size: min 2x2 grids, max 9x9 grids 
