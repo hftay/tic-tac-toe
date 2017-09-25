@@ -127,6 +127,21 @@ var isWon = function(){
 }
 
 // --------------- DOM Related Functions --------------- 
+
+//  can minimise global variables BY creating a dom object and passing them into functions like so:
+var doms = {
+	body: document.querySelector("body"),
+	gameBoardDiv: document.querySelector(".game-board"),
+	displayWinnerDiv: document.querySelector(".display-winner"),
+	displayPlayerTurnDiv: document.querySelector(".display-player-turn"),
+	heroWinCounterDiv: document.querySelector(".hero-win-counter"),
+	villainWinCounterDiv: document.querySelector(".villain-win-counter"),
+	restartGameDiv: document.querySelector(".restart-game"),
+	mute: document.querySelector(".mute"),
+	increaseBoardSize: document.querySelector(".increase-board-size"),
+	decreaseBoardSize: document.querySelector(".decrease-board-size")
+};
+
 var body = document.querySelector("body");
 var gameBoardDiv = document.querySelector(".game-board");
 var displayWinnerDiv = document.querySelector(".display-winner");
