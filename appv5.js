@@ -1,5 +1,15 @@
 console.log("Tic-Tac-Tropical");
 
+// kasun feedback: minimise global variables where possible
+// mission to remove global variables
+var customisableVars = {
+	boardLength: 3,
+	boardvhRatio: 0.45,
+	blankToken: " ",
+	heroToken: "X",
+	villainToken: "O"
+}
+
 // customisable variables
 var boardLength = 3;
 var boardvhRatio = 0.45;
@@ -128,7 +138,8 @@ var isWon = function(){
 
 // --------------- DOM Related Functions --------------- 
 
-//  can minimise global variables BY creating a dom object and passing them into functions like so:
+// kasun feedback: minimise global variables where possible
+// minimise global variables BY creating a dom object and passing them into functions like so:
 var doms = {
 	body: document.querySelector("body"),
 	gameBoardDiv: document.querySelector(".game-board"),
@@ -140,7 +151,7 @@ var doms = {
 	mute: document.querySelector(".mute"),
 	increaseBoardSize: document.querySelector(".increase-board-size"),
 	decreaseBoardSize: document.querySelector(".decrease-board-size")
-};
+}; // then pass it into the individual functions for use e.g. resetGameDisplay = function(doms.heroWinCounterDiv)
 
 var body = document.querySelector("body");
 var gameBoardDiv = document.querySelector(".game-board");
@@ -154,7 +165,7 @@ var increaseBoardSize = document.querySelector(".increase-board-size");
 var decreaseBoardSize = document.querySelector(".decrease-board-size");
 
 var makeNewBoard = function(pauseDuration){
-	emptyBoardArr(boardArr); // this step is requred, otherwise only the DOM game-board is updated
+	emptyBoardArr(boardArr); // this step is required, otherwise only the DOM game-board is updated
 	setTimeout(resetGameDisplay,pauseDuration); //
 	setTimeout(generateBlankDomBoard,pauseDuration);
 	numMoves = 0;
@@ -222,6 +233,8 @@ var reinitialiseGlobalVars = function (){
 
 // --------------- Game Event Listeners --------------- 
 
+
+// kasun feedback: create a higher level function that encapsulates the smaller functions to make your code more readable
 gameBoardDiv.addEventListener("click", function(event){
 	stopCelebration();
 
