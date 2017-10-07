@@ -7,7 +7,7 @@ Project timeframe: 3.5 days
 * first player to create a row of tokens the length of the board wins
 * size of gameboard customisable in browser
 
-**Link to app:** [Tropicoe](https://hftay.github.io/tic-tac-toe/)
+**Link to app:** [Tropicoe](https://hftay.github.io/tropicoe/)
 
 Technical Requirement:
 - Render a game in the browser
